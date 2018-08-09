@@ -1,0 +1,22 @@
+{
+  "methodName": "buildFrame",
+  "paramNames": [
+    "width",
+    "height",
+    "title"
+  ],
+  "srcTypes": [
+    "int",
+    "int",
+    "java.lang.String"
+  ],
+  "tgtType": "javax.swing.JFrame",
+  "packages": [
+    "javax.swing",
+    "java.awt.Window"
+  ],
+  "libs": [
+    "./lib/rt8.jar"
+  ],
+  "testPath": "../synth/sywindow/build-frame/test.java"
+}

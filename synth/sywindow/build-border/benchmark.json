@@ -1,0 +1,25 @@
+{
+  "lb":3,
+  "ub":3,
+  "methodName": "buildBorder",
+  "paramNames": [
+    "left",
+    "right",
+    "bottom",
+    "top"
+  ],
+  "srcTypes": [
+    "int",
+    "int",
+    "int",
+    "int"
+  ],
+  "tgtType": "javax.swing.JPanel",
+  "packages": [
+    "javax.swing"
+  ],
+  "libs": [
+    "./lib/rt8.jar"
+  ],
+  "testPath": "../synth/sywindow/build-border/test.java"
+}

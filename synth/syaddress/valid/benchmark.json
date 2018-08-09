@@ -1,0 +1,21 @@
+{
+  "methodName": "isValid",
+  "paramNames": [
+    "address",
+    "ch"
+  ],
+  "srcTypes": [
+    "cmu.edu.mail.Address",
+    "java.lang.String"
+  ],
+  "tgtType": "boolean",
+  "packages": [
+    "cmu.edu.mail.Address",
+    "java.lang"
+  ],
+  "libs": [
+    "./lib/rt8.jar",
+    "../lib/symail.jar"
+  ],
+  "testPath": "../synth/syaddress/valid/test.java"
+}

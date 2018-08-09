@@ -1,0 +1,20 @@
+{
+  "methodName": "setFrameVisible",
+  "paramNames": [
+    "frame",
+    "visible"
+  ],
+  "srcTypes": [
+    "javax.swing.JFrame",
+    "boolean"
+  ],
+  "tgtType": "javax.swing.JFrame",
+  "packages": [
+    "javax.swing",
+    "java.awt.Window"
+  ],
+  "libs": [
+    "./lib/rt8.jar"
+  ],
+  "testPath": "../synth/sywindow/visible/test.java"
+}

@@ -1,0 +1,22 @@
+{
+  "methodName": "setFrameAttributes",
+  "paramNames": [
+    "frame",
+    "closeOperation",
+    "resizable"
+  ],
+  "srcTypes": [
+    "javax.swing.JFrame",
+    "int",
+    "boolean"
+  ],
+  "tgtType": "javax.swing.JFrame",
+  "packages": [
+    "javax.swing",
+    "java.awt.Frame"
+  ],
+  "libs": [
+    "./lib/rt8.jar"
+  ],
+  "testPath": "../synth/sywindow/set-frame-attributes/test.java"
+}

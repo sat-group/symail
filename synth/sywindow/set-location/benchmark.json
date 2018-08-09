@@ -1,0 +1,22 @@
+{
+  "methodName": "setLocation",
+  "paramNames": [
+    "frame",
+    "x",
+    "y"
+  ],
+  "srcTypes": [
+    "javax.swing.JFrame",
+    "int",
+    "int"
+  ],
+  "tgtType": "javax.swing.JFrame",
+  "packages": [
+    "javax.swing",
+    "java.awt.Window"
+  ],
+  "libs": [
+    "./lib/rt8.jar"
+  ],
+  "testPath": "../synth/sywindow/set-location/test.java"
+}

@@ -1,0 +1,3 @@
+[submodule "sypet"]
+	path = sypet
+	url = https://github.com/sat-group/sypet
