@@ -1,0 +1,21 @@
+{
+  "methodName": "createFont",
+  "paramNames": [
+    "font",
+    "style",
+    "size"
+  ],
+  "srcTypes": [
+    "java.lang.String",
+    "int",
+    "int"
+  ],
+  "tgtType": "java.awt.Font",
+  "packages": [
+    "java.awt.Font"
+  ],
+  "libs": [
+    "./lib/rt8.jar"
+  ],
+  "testPath": "../synth/sywindow/create-font/test.java"
+}

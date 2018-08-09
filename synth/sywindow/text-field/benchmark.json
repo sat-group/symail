@@ -1,0 +1,22 @@
+{
+  "methodName": "buildTextField",
+  "paramNames": [
+    "font",
+    "style",
+    "size"
+  ],
+  "srcTypes": [
+    "java.lang.String",
+    "int",
+    "int"
+  ],
+  "tgtType": "javax.swing.JTextField",
+  "packages": [
+    "javax.swing",
+    "java.awt.Font"
+  ],
+  "libs": [
+    "./lib/rt8.jar"
+  ],
+  "testPath": "../synth/sywindow/text-field/test.java"
+}

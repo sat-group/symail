@@ -1,0 +1,17 @@
+{
+  "methodName": "createCheckBox",
+  "paramNames": [
+    "text"
+  ],
+  "srcTypes": [
+    "java.lang.String"
+  ],
+  "tgtType": "javax.swing.JCheckBox",
+  "packages": [
+    "javax.swing"
+  ],
+  "libs": [
+    "./lib/rt8.jar"
+  ],
+  "testPath": "../synth/sywindow/create-checkbox/test.java"
+}

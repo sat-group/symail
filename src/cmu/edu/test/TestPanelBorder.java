@@ -19,5 +19,4 @@ public class TestPanelBorder {
 		assertTrue(top == 36 && bottom == 35 && left == 31 && right == 32);
 	}
 
-
 }

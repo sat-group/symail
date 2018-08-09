@@ -1,0 +1,17 @@
+{
+  "methodName": "buildImage",
+  "paramNames": [
+    "path"
+  ],
+  "srcTypes": [
+    "java.lang.String"
+  ],
+  "tgtType": "javax.swing.JLabel",
+  "packages": [
+    "javax.swing"
+  ],
+  "libs": [
+    "./lib/rt8.jar"
+  ],
+  "testPath": "../synth/sywindow/build-image/test.java"
+}

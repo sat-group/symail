@@ -1,0 +1,23 @@
+{
+  "ub":3,
+  "methodName": "buildGrid",
+  "paramNames": [
+    "panel",
+    "cols",
+    "rows"
+  ],
+  "srcTypes": [
+    "javax.swing.JPanel",
+    "int",
+    "int"
+  ],
+  "tgtType": "javax.swing.JPanel",
+  "packages": [
+    "javax.swing",
+    "java.awt"
+  ],
+  "libs": [
+    "./lib/rt8.jar"
+  ],
+  "testPath": "../synth/sywindow/grid-layout/test.java"
+}

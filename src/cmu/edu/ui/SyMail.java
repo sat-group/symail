@@ -40,11 +40,12 @@ import cmu.edu.window.SyWindow;
 
 public class SyMail {
 	
-	public static void main(String args[])
-	{
+	public static void main(String args[]) throws Throwable {
+		// frame for the login window
 		SyLoginWindow login = new SyLoginWindow();
 		JFrame loginFrame = login.buildLogin();
-		SyWindow.setFrameVisible(loginFrame, true);
+		loginFrame = SyWindow.setFrameVisible(loginFrame, true);
+		
 	}
 
 }

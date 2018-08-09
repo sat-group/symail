@@ -1,0 +1,17 @@
+{
+  "methodName": "createButton",
+  "paramNames": [
+    "name"
+  ],
+  "srcTypes": [
+    "java.lang.String"
+  ],
+  "tgtType": "javax.swing.JButton",
+  "packages": [
+    "javax.swing"
+  ],
+  "libs": [
+    "./lib/rt8.jar"
+  ],
+  "testPath": "../synth/sywindow/create-button/test.java"
+}

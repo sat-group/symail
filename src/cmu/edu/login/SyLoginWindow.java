@@ -33,15 +33,57 @@
 
 package cmu.edu.login;
 
+import java.awt.Font;
+import java.io.IOException;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 import cmu.edu.window.SyWindow;
 
 public class SyLoginWindow {
 			
-	public JFrame buildLogin() {
-		JFrame loginFrame = SyWindow.buildFrame(300, 400, "SyMail");
+	public JFrame buildLogin() throws IOException {
+		// login frame
+		JFrame loginFrame = SyWindow.buildFrame(300, 400, "SyMail - Synthesized Mail Client");
 		loginFrame = SyWindow.setLocation(loginFrame, 500, 200);
 		loginFrame = SyWindow.setFrameAttributes(loginFrame, JFrame.EXIT_ON_CLOSE, false);
+		
+		// panel for the login window
+		JPanel panel = SyWindow.buildBorder(35,30,35,30);
+		panel = SyWindow.buildGrid(panel, 1, 5);
+		
+		// image for the icon
+		JLabel icon = SyWindow.buildImage("./img/logo.png");
+		panel.add(icon);
+		
+		// text for username
+		JTextField username = SyWindow.buildTextField("serif", Font.PLAIN, 18);
+		panel.add(username);
+		
+		// text for password
+		JPasswordField password = SyWindow.buildPasswordField("serif", Font.PLAIN, 18);
+		panel.add(password);
+		
+		// login button
+		JButton login = SyWindow.createButton("LOGIN");
+		Font font = SyWindow.createFont("serif", Font.PLAIN, 18);
+		login.setFont(font);
+		panel.add(login);
+		
+		// checkbox for offline mode
+		JCheckBox cbox = SyWindow.createCheckBox("Offline mode");
+		cbox.setFont(font);
+		panel.add(cbox);
+		
+		// add the panel to the login frame
+		loginFrame.add(panel);
+		
 		return loginFrame;
 	}
 
