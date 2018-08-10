@@ -1,0 +1,24 @@
+{
+  "ub":3,
+  "methodName": "setTextFont",
+  "paramNames": [
+    "label",
+    "text",
+    "component"
+  ],
+  "srcTypes": [
+    "javax.swing.JLabel",
+    "java.lang.String",
+    "java.awt.Component"
+  ],
+  "tgtType": "javax.swing.JLabel",
+  "packages": [
+    "javax.swing.JLabel",
+    "java.awt.Font",
+    "java.awt.Component"
+  ],
+  "libs": [
+    "./lib/rt8.jar"
+  ],
+  "testPath": "../synth/sywindow/label-text-font/test.java"
+}

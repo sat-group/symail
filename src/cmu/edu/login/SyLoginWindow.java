@@ -34,6 +34,8 @@
 package cmu.edu.login;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -44,7 +46,10 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import cmu.edu.address.SyAddress;
+import cmu.edu.mail.Address;
 import cmu.edu.window.SyWindow;
+import cmu.edu.window.TextPrompt;
 
 public class SyLoginWindow {
 			
@@ -81,8 +86,37 @@ public class SyLoginWindow {
 		cbox.setFont(font);
 		panel.add(cbox);
 		
+		TextPrompt logins = new TextPrompt("[Enter Username]", username);
+		TextPrompt passwords = new TextPrompt("[Enter Password]", password);
+
+		
 		// add the panel to the login frame
 		loginFrame.add(panel);
+		
+		login.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				Address address = new Address(username.getText());
+				
+				// check if the username is valid
+				if (SyAddress.isValid(address, "@gmail.com")) {
+					System.out.println("address is valid!");
+					
+					// check if the username exists
+					if (cbox.isSelected()) {
+						
+						
+					}
+				} else {
+					// Error message!
+					System.out.println("Error!");
+				}
+							
+			}
+			
+		});
 		
 		return loginFrame;
 	}

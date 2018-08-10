@@ -3,6 +3,7 @@ package cmu.edu.window;
 import java.io.IOException;
 
 import javax.swing.JCheckBox;
+import javax.swing.text.JTextComponent;
 
 public class SyWindow {
 
@@ -99,6 +100,16 @@ public class SyWindow {
 		JCheckBox var_0 = new JCheckBox(text);
 		return var_0;
 		// *** [End] Code Synthesized by SyPet 2.0 ***
+	}
+	
+	public static javax.swing.JLabel setTextFont(javax.swing.JLabel label, String text, java.awt.Component component){
+		// *** [Begin] Code Synthesized by SyPet 2.0 ***
+		label.setText(text);
+	    java.awt.Font var_0 = component.getFont();
+	    label.setFont(var_0);
+	    return label;
+	 // *** [End] Code Synthesized by SyPet 2.0 ***
+		
 	}
 
 }

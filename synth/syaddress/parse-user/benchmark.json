@@ -1,0 +1,24 @@
+{
+  "ub":4,
+  "methodName": "parseUser",
+  "paramNames": [
+    "address",
+    "pattern",
+    "start"
+  ],
+  "srcTypes": [
+    "cmu.edu.mail.Address",
+    "java.lang.String",
+    "int"
+  ],
+  "tgtType": "java.lang.String",
+  "packages": [
+    "cmu.edu.mail.Address",
+    "java.lang.String"
+  ],
+  "libs": [
+    "./lib/rt8.jar",
+    "../lib/symail.jar"
+  ],
+  "testPath": "../synth/syaddress/parse-user/test.java"
+}

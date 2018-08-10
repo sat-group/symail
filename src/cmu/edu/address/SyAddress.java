@@ -50,5 +50,15 @@ public class SyAddress {
 		return var_1;
 		// *** [End] Code Synthesized by SyPet 2.0 ***
 	}
+	
+	public static String parseUser(Address address, java.lang.String pattern, int start) {
+		// *** [Begin] Code Synthesized by SyPet 2.0 ***
+		java.lang.String var_0 = pattern.substring(start);
+	    java.lang.String var_1 =  new java.lang.String();
+	    java.lang.String var_2 = address.getAddress();
+	    java.lang.String var_3 = var_2.replaceFirst(var_0,var_1);
+	    return var_3;
+		// *** [End] Code Synthesized by SyPet 2.0 *** 
+	}
 
 }
