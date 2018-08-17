@@ -31,9 +31,22 @@
  *	OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+package cmu.edu.test;
 
-package cmu.edu.mail;
+import static org.junit.Assert.assertTrue;
 
-public class Attachment {
+import org.junit.Test;
+
+import cmu.edu.util.Telnet;
+
+public class TestTelnetStringPort {
+	
+	@Test
+	public void test1() throws Throwable {
+		
+		java.lang.String output = Telnet.canReachGmail("smtp.gmail.com",587);
+		assertTrue(output.contains("smtp.gmail.com"));
+		
+	}
 
 }

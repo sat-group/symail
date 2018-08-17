@@ -31,28 +31,20 @@
  *	OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package cmu.edu.test;
-
-import static org.junit.Assert.assertTrue;
-
-import org.junit.Test;
+package cmu.edu.composition;
 
 import cmu.edu.window.SyWindow;
 
-public class TestLabelTextFont {
-	
-	@Test
-	public void test1() {
-		javax.swing.JLabel label = new javax.swing.JLabel();
-		javax.swing.JTextField username = new javax.swing.JTextField();
-		java.awt.Font var_1 = new java.awt.Font("serif", java.awt.Font.PLAIN, 18);
-		username.setFont(var_1);
-		javax.swing.JLabel output = SyWindow.setTextFontComponent(label, "[ Username ]", username);
-		assertTrue(output.getText().equals("[ Username ]") &&
-				output.getFont().getName().equals("serif") &&
-				   output.getFont().getStyle() == java.awt.Font.PLAIN &&
-				   output.getFont().getSize() == 18);		
-	}
+public class SyWindowComposition {
 
+	public static javax.swing.JPanel buildWarningWindow(java.lang.String image, java.lang.String error, java.awt.Font font)
+			throws Exception {
+		javax.swing.JPanel panel = new javax.swing.JPanel();
+		javax.swing.JLabel icon = SyWindow.buildImage("./img/warning.png");
+		javax.swing.JLabel label = SyWindow.setTextFont(icon, error, font);
+		panel.add(icon);
+		panel.add(label);
+		return panel;
+	}
 
 }

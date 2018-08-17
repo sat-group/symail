@@ -31,28 +31,31 @@
  *	OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package cmu.edu.test;
+package cmu.edu.util;
 
-import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
-
-import cmu.edu.window.SyWindow;
-
-public class TestLabelTextFont {
+@SuppressWarnings("deprecation")
+public class Telnet {
 	
-	@Test
-	public void test1() {
-		javax.swing.JLabel label = new javax.swing.JLabel();
-		javax.swing.JTextField username = new javax.swing.JTextField();
-		java.awt.Font var_1 = new java.awt.Font("serif", java.awt.Font.PLAIN, 18);
-		username.setFont(var_1);
-		javax.swing.JLabel output = SyWindow.setTextFontComponent(label, "[ Username ]", username);
-		assertTrue(output.getText().equals("[ Username ]") &&
-				output.getFont().getName().equals("serif") &&
-				   output.getFont().getStyle() == java.awt.Font.PLAIN &&
-				   output.getFont().getSize() == 18);		
+	public static java.net.Socket createSocket(String host, int port) throws Exception {
+		java.net.Socket soc = new java.net.Socket(host, port);
+		return soc;
 	}
-
-
+		
+	public static java.lang.String canReachGmail(String host, int port) throws Exception {
+		java.net.Socket soc = new java.net.Socket(host, port);
+		java.io.InputStream input = soc.getInputStream();
+		java.io.DataInputStream din = new java.io.DataInputStream(input);		
+		java.lang.String output = din.readLine();
+		return output;
+	}
+	
+	public static java.lang.String canReachGmail(java.net.Socket soc) throws Exception {
+		java.io.InputStream input = soc.getInputStream();
+		java.io.DataInputStream din = new java.io.DataInputStream(input);
+		java.lang.String output = din.readLine();
+		soc.close();
+		return output;
+	}
+	
 }

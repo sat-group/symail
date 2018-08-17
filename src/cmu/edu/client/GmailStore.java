@@ -31,69 +31,76 @@
  *	OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package cmu.edu.mail;
+package cmu.edu.client;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Properties;
+import java.util.List;
 
-import cmu.edu.mail.Address;
+import javax.mail.Session;
+import javax.mail.Store;
 
-public class Mail {
+import cmu.edu.gmail.SyMailClient;
+import cmu.edu.mail.Mail;
 
-	private String title;
-	private Address from;
-	private String body;
-	private LocalDateTime date;
-	private boolean replyTo;
-	private boolean favorite;
-	private boolean read;
+public class GmailStore {
 
-	public String getTitle() {
-		return title;
-	}
+	private static String host = "pop.gmail.com";
+	private static String mailStoreType = "pop3s";
+	private static String username;
+	private static String password;
+	private static Properties properties;
+	private static boolean connected = false;
+	private static Store store = null;
+	private static Session session = null;
 
-	public String getBody() {
-		return body;
-	}
+	public static List<Mail> mails = new ArrayList<>();
 
-	public boolean getFavorite() {
-		return favorite;
-	}
-
-	public boolean getReplied() {
-		return replyTo;
-	}
-
-	public Address getAddress() {
-		return from;
-	}
-
-	public LocalDateTime getSentDate() {
-		return date;
+	public Store getStore() {
+		return store;
 	}
 	
-	public boolean getRead() {
-		return read;
+	public Session getSession() {
+		return session;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+	
+	public String getPassword() {
+		return password;
 	}
 
-	public Mail(String title, String address, String body, LocalDateTime date) {
-		this.title = title;
-		this.from = new Address(address);
-		this.body = body;
-		this.date = date;
-		favorite = false;
-		replyTo = false;
-		read = false;
+	public GmailStore(String user, String pwd) {
+		username = user;
+		password = pwd;
+
+		properties = SyMailClient.buildProperties("mail.pop3.host", "mail.pop3.port", "mail.pop3.starttls.enable",
+				"mail.pop3s.ssl.trust", "995", "pop.gmail.com", "true");
+		
+		try {
+			session = SyMailClient.createSession(properties);
+			store = SyMailClient.createStore(session, mailStoreType, host, username, password);
+			connected = true;
+		} catch (javax.mail.MessagingException e) {
+			// invalid password
+			connected = false;
+		}
 	}
 
-	public Mail(String title, String address, String body, LocalDateTime date, boolean favorite, boolean reply,
-			boolean search, boolean read) {
-		this.title = title;
-		this.from = new Address(address);
-		this.body = body;
-		this.date = date;
-		this.favorite = favorite;
-		this.replyTo = reply;
-		this.read = read;
+	public static void connect() {
+		try {
+			store = SyMailClient.createStore(session, mailStoreType, host, username, password);
+			connected = true;
+		} catch (javax.mail.MessagingException e) {
+			// invalid password
+			connected = false;
+		}
+	}
+
+	public static boolean isConnected() {
+		return connected;
 	}
 
 }

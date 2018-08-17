@@ -37,22 +37,17 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import cmu.edu.window.SyWindow;
+import cmu.edu.util.Telnet;
 
-public class TestLabelTextFont {
+public class TestTelnetSocket {
 	
 	@Test
-	public void test1() {
-		javax.swing.JLabel label = new javax.swing.JLabel();
-		javax.swing.JTextField username = new javax.swing.JTextField();
-		java.awt.Font var_1 = new java.awt.Font("serif", java.awt.Font.PLAIN, 18);
-		username.setFont(var_1);
-		javax.swing.JLabel output = SyWindow.setTextFontComponent(label, "[ Username ]", username);
-		assertTrue(output.getText().equals("[ Username ]") &&
-				output.getFont().getName().equals("serif") &&
-				   output.getFont().getStyle() == java.awt.Font.PLAIN &&
-				   output.getFont().getSize() == 18);		
+	public void test1() throws Throwable {
+		
+		java.net.Socket socket = new java.net.Socket("smtp.gmail.com",587);
+		java.lang.String output = Telnet.canReachGmail(socket);
+		assertTrue(output.contains("smtp.gmail.com") && socket.isClosed());
+		
 	}
-
 
 }

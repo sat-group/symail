@@ -33,18 +33,51 @@
 
 package cmu.edu.ui;
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
+import cmu.edu.client.GmailStore;
+import cmu.edu.compose.SyComposeWindow;
+import cmu.edu.inbox.SyInboxWindow;
 import cmu.edu.login.SyLoginWindow;
+import cmu.edu.open.SyOpenWindow;
+import cmu.edu.util.SyFileUtils;
 import cmu.edu.window.SyWindow;
 
 public class SyMail {
 	
 	public static void main(String args[]) throws Throwable {
+		
+		if (!SyFileUtils.existDirectory("tmp/"))
+			SyFileUtils.createDirectory("tmp/");
+		
 		// frame for the login window
 		SyLoginWindow login = new SyLoginWindow();
 		JFrame loginFrame = login.buildLogin();
-		loginFrame = SyWindow.setFrameVisible(loginFrame, true);		
+		loginFrame = SyWindow.setFrameVisible(loginFrame, true);
+		
+//		String username = "muse.program.synthesis";
+//		String password = "utcmu2018";
+//		
+//		GmailStore gmail = new GmailStore(username,password);
+//		SyInboxWindow inbox = new SyInboxWindow(new ArrayList<>(), gmail, username, password);
+//		JFrame inboxFrame = inbox.buildInbox();
+//		SyWindow.setFrameVisible(inboxFrame, true);
+//		gmail.getStore().close();
+		
+//		GmailStore gmail = new GmailStore(username,password);
+//		SyComposeWindow compose = new SyComposeWindow(gmail);
+//		JFrame composeFrame = compose.buildCompose();
+//		SyWindow.setFrameVisible(composeFrame, true);
+		
+//		GmailStore gmail = new GmailStore(username,password);
+//		SyOpenWindow open = new SyOpenWindow(gmail, "rubengmartins@gmail.com", "testing", "This is a message", false);
+//		JFrame openFrame = open.buildOpen();
+//		SyWindow.setFrameVisible(openFrame, true);
+		
+		
+		
 	}
 
 }

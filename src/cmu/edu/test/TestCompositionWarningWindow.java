@@ -37,22 +37,21 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import cmu.edu.window.SyWindow;
+import cmu.edu.composition.SyWindowComposition;
 
-public class TestLabelTextFont {
+public class TestCompositionWarningWindow {
 	
 	@Test
-	public void test1() {
-		javax.swing.JLabel label = new javax.swing.JLabel();
-		javax.swing.JTextField username = new javax.swing.JTextField();
-		java.awt.Font var_1 = new java.awt.Font("serif", java.awt.Font.PLAIN, 18);
-		username.setFont(var_1);
-		javax.swing.JLabel output = SyWindow.setTextFontComponent(label, "[ Username ]", username);
-		assertTrue(output.getText().equals("[ Username ]") &&
-				output.getFont().getName().equals("serif") &&
-				   output.getFont().getStyle() == java.awt.Font.PLAIN &&
-				   output.getFont().getSize() == 18);		
+	public void test1() throws Exception {
+		
+		java.awt.Font font = new java.awt.Font("serif", java.awt.Font.PLAIN, 18);
+		javax.swing.JPanel panel = SyWindowComposition.buildWarningWindow("./img/warning.png", "Invalid GMail address", font);
+		boolean r1 = panel.getComponent(0).getFont().equals(font);
+		boolean r2 = ((javax.swing.JLabel) panel.getComponent(0)).getIcon().getIconWidth() == 48;
+		boolean r3 = ((javax.swing.JLabel) panel.getComponent(0)).getIcon().getIconHeight() == 48;
+		boolean r4 = ((javax.swing.JLabel) panel.getComponent(0)).getText().equals("Invalid GMail address");
+		assertTrue(r1 && r2 && r3 && r4);		
+		
 	}
-
 
 }

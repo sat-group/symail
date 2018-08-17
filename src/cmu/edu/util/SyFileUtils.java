@@ -31,28 +31,43 @@
  *	OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package cmu.edu.test;
+package cmu.edu.util;
 
-import static org.junit.Assert.assertTrue;
+import java.io.File;
+import java.io.IOException;
 
-import org.junit.Test;
+import org.apache.commons.io.FileUtils;
 
-import cmu.edu.window.SyWindow;
-
-public class TestLabelTextFont {
+@SuppressWarnings("deprecation")
+public class SyFileUtils {
 	
-	@Test
-	public void test1() {
-		javax.swing.JLabel label = new javax.swing.JLabel();
-		javax.swing.JTextField username = new javax.swing.JTextField();
-		java.awt.Font var_1 = new java.awt.Font("serif", java.awt.Font.PLAIN, 18);
-		username.setFont(var_1);
-		javax.swing.JLabel output = SyWindow.setTextFontComponent(label, "[ Username ]", username);
-		assertTrue(output.getText().equals("[ Username ]") &&
-				output.getFont().getName().equals("serif") &&
-				   output.getFont().getStyle() == java.awt.Font.PLAIN &&
-				   output.getFont().getSize() == 18);		
+	public static boolean existFile(String path) {
+		File file = new File(path);
+		return file.isFile();
 	}
-
+	
+	public static boolean existDirectory(String path) {
+		File dir = new File(path);
+		return dir.isDirectory();
+	}
+	
+	public static File createDirectory(String path) {
+		File dir = new File(path);
+		dir.mkdir();
+		return dir;
+	}
+		
+	public static File writeToFile(String path, String content) throws IOException {
+		File file = new File(path);
+		FileUtils.writeStringToFile(file, content);
+		return file;
+	}
+	
+	public static String readFromFile(String path) throws IOException {
+		File file = new File(path);
+		String content = FileUtils.readFileToString(file);
+		return content;
+	}
+	
 
 }
