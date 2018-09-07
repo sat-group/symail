@@ -48,37 +48,41 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import cmu.edu.inbox.SyInboxWindow;
-import cmu.edu.address.SyAddress;
 import cmu.edu.client.GmailStore;
 import cmu.edu.mail.Address;
+import cmu.edu.string.SyAddress;
 import cmu.edu.util.SyCryptoUtils;
 import cmu.edu.util.SyFileUtils;
-import cmu.edu.util.Telnet;
+import cmu.edu.util.SyInternet;
 import cmu.edu.warning.SyWarningWindow;
 import cmu.edu.window.SyWindow;
 import cmu.edu.window.TextPrompt;
 
 public class SyLoginWindow {
-	
+
 	private GmailStore gmail = null;
 
-	public void inboxScreen(String username, String password) throws Exception {
-		SyInboxWindow inbox = new SyInboxWindow(new ArrayList<>(), gmail, username, password);
-		JFrame inboxFrame = inbox.buildInbox();
-		SyWindow.setFrameVisible(inboxFrame, true);
+	public void inboxScreen(String username, String password) throws Throwable {
+		try {
+			assert (gmail != null);
+			SyInboxWindow inbox = new SyInboxWindow(new ArrayList<>(), gmail, username, password);
+			JFrame inboxFrame = inbox.buildInbox();
+			SyWindow.setFrameVisible(inboxFrame, true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@SuppressWarnings("unused")
 	public JFrame buildLogin() throws IOException {
 		// login frame
-		final JFrame loginFrame = SyWindow.buildFrame(300, 400, "SyMail - Synthesized Mail Client");
-		loginFrame.setLocationRelativeTo(null);
-		// loginFrame = SyWindow.setLocation(loginFrame, 500, 200);
+		final JFrame loginFrame = SyWindow.buildFrame(300, 350, "SyMail - Synthesized Mail Client");
+		loginFrame.setLocationRelativeTo(null); // centers the frame
 		SyWindow.setFrameAttributes(loginFrame, JFrame.EXIT_ON_CLOSE, false);
 
 		// panel for the login window
 		JPanel panel = SyWindow.buildBorder(35, 30, 35, 30);
-		panel = SyWindow.buildGrid(panel, 1, 5);
+		panel = SyWindow.buildGrid(panel, 1, 4);
 
 		// image for the icon
 		JLabel icon = SyWindow.buildImage("./img/logo.png");
@@ -92,16 +96,16 @@ public class SyLoginWindow {
 		JPasswordField password = SyWindow.buildPasswordField("serif", Font.PLAIN, 18);
 		panel.add(password);
 
-		// login button
-		JButton login = SyWindow.createButton("LOGIN");
+		// font
 		Font font = SyWindow.createFont("serif", Font.PLAIN, 18);
-		login.setFont(font);
+
+		// login button
+		JButton login = SyWindow.createButtonFontT("LOGIN", font);
 		panel.add(login);
 
 		// checkbox for offline mode
-		JCheckBox cbox = SyWindow.createCheckBox("Offline mode");
-		cbox.setFont(font);
-		panel.add(cbox);
+		//JCheckBox cbox = SyWindow.createCheckBoxFontT("Offline mode", font);
+		//panel.add(cbox);
 
 		// have some default text
 		TextPrompt logins = new TextPrompt("[Enter Username]", username);
@@ -123,36 +127,36 @@ public class SyLoginWindow {
 				// check if the username is valid
 				if (SyAddress.isValid(address, "@gmail.com")) {
 
-					if (cbox.isSelected()) {
-						// check if the username exists
-						String pwdfile = userdirectory + "/" + user + ".pwd";
-						if (SyFileUtils.existFile(pwdfile)) {
-							try {
-								String encryptedFromFile = SyFileUtils.readFromFile(pwdfile);
-								String decryptedFromFile = SyCryptoUtils.decrypt(encryptedFromFile, password.getText());
-
-								if (decryptedFromFile.equals(password.getText())) {
-									// goto next screen
-									loginFrame.dispose();
-									inboxScreen(user, password.getText());
-								} else {
-									SyWarningWindow.PasswordCheck();
-								}
-
-							} catch (Exception e1) {
-								SyWarningWindow.PasswordCheck();
-							}
-
-						} else {
-							SyWarningWindow.PasswordCheck();
-						}
-
-					} else {
+//					if (cbox.isSelected()) {
+//						// check if the username exists
+//						String pwdfile = userdirectory + "/" + user + ".pwd";
+//						if (SyFileUtils.existFile(pwdfile)) {
+//							try {
+//								String encryptedFromFile = SyFileUtils.readFromFile(pwdfile);
+//								String decryptedFromFile = SyCryptoUtils.decrypt(encryptedFromFile, password.getText());
+//
+//								if (decryptedFromFile.equals(password.getText())) {
+//									// goto next screen
+//									loginFrame.dispose();
+//									inboxScreen(user, password.getText());
+//								} else {
+//									SyWarningWindow.PasswordCheck();
+//								}
+//
+//							} catch (Throwable e1) {
+//								SyWarningWindow.PasswordCheck();
+//							}
+//
+//						} else {
+//							SyWarningWindow.PasswordCheck();
+//						}
+//
+//					} else {
 						// check connection to the internet
 
 						try {
-							java.net.Socket socket = Telnet.createSocket("smtp.gmail.com", 587);
-							if (Telnet.canReachGmail(socket).contains("smtp.gmail.com")) {
+							java.net.Socket socket = SyInternet.createSocket("smtp.gmail.com", 587);
+							if (SyInternet.canReachGmail(socket).contains("smtp.gmail.com")) {
 								// check if username/password is valid
 								gmail = new GmailStore(user, password.getText());
 								if (gmail.isConnected()) {
@@ -184,12 +188,10 @@ public class SyLoginWindow {
 								SyWarningWindow.InternetCheck();
 							}
 
-						} catch (Exception e1) {
+						} catch (Throwable e1) {
 							// no internet connection
 							SyWarningWindow.InternetCheck();
 						}
-
-					}
 
 				} else {
 					SyWarningWindow.GmailFailure(username.getText());

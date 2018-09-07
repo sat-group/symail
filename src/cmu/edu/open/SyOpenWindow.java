@@ -20,6 +20,7 @@ import javax.swing.JTextField;
 
 import cmu.edu.client.GmailStore;
 import cmu.edu.compose.SyComposeWindow;
+import cmu.edu.mail.Mail;
 import cmu.edu.window.SyWindow;
 
 public class SyOpenWindow {
@@ -35,31 +36,24 @@ public class SyOpenWindow {
 	private String subjectName;
 	private String bodyName;
 	private boolean favoriteOption;
-	private boolean deleted;
-	private boolean replied;
+	private Mail mail;
 
-	public SyOpenWindow(GmailStore gmail, String to, String subject, String body, boolean favorite) {
+	public SyOpenWindow(GmailStore gmail, Mail mail) {
 
 		this.gmail = gmail;
-		toName = to;
-		subjectName = subject;
-		bodyName = body;
-		favoriteOption = favorite;
-		deleted = false;
-		replied = false;
-
+		this.mail = mail;
+		toName = mail.getAddress().getAddress();
+		subjectName = mail.getTitle();
+		bodyName = mail.getBody();
+		favoriteOption = mail.getFavorite();
 	}
 	
-	boolean getDeleted() {
-		return deleted;
-	}
-
 	@SuppressWarnings("unused")
 	public JFrame buildOpen() throws IOException {
 		// JPanel for the text fields
 		JFrame openFrame = SyWindow.buildFrame(450, 600, "SyMail - Synthesized Mail Client");
 		openFrame.setLocationRelativeTo(null);
-		SyWindow.setFrameAttributes(openFrame, JFrame.EXIT_ON_CLOSE, false);
+		SyWindow.setFrameAttributes(openFrame, JFrame.DO_NOTHING_ON_CLOSE, false);
 
 		JPanel tfPanel = new JPanel(new GridLayout(4, 2, 10, 2));
 
@@ -79,6 +73,7 @@ public class SyOpenWindow {
 		tfPanel.add(to);
 
 		tfPanel.add(new JLabel("  Subject:  "));
+		//FIXME: synthesize JTextField 
 		subject = new JTextField(15);
 		subject.setText(subjectName);
 		subject.setEditable(false);
@@ -88,22 +83,26 @@ public class SyOpenWindow {
 		favoriteText = new JTextField(15);
 		if (favoriteOption)
 			favoriteText.setText("Yes");
-		else 
+		else  
 			favoriteText.setText("No");
 		favoriteText.setEditable(false);
 		tfPanel.add(favoriteText);
 
+		//FIXME: synthesize JTextArea
 		body = new JTextArea();
 		body.setFont(font);
 		body.setLineWrap(true);
 		body.setWrapStyleWord(true);
 		// light blue
+		// FIXME: synthesize color
 		body.setBackground(new Color(204, 238, 241));
 		body.setEditable(false);
 		body.setText(bodyName);
 
+		//FIXME: synthesize JScrollPane
 		// Wrap the JTextArea inside a JScrollPane
 		JScrollPane tAreaScrollPane = new JScrollPane(body);
+		//FIXME: synthesize empty border
 		tAreaScrollPane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		tAreaScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
@@ -112,17 +111,12 @@ public class SyOpenWindow {
 		
 		JButton favorite = SyWindow.createButton("Favorite");
 		if (favoriteOption)
-			favorite.setName("Unfavorite");
+			favorite.setText("Unfavorite");
 		favorite.setFont(font);
 		
-		JButton reply = SyWindow.createButton("Reply");
-		reply.setFont(font);
-		
-		JButton delete = SyWindow.createButton("Delete");
-		delete.setFont(font);
-		
-		JButton close = SyWindow.createButton("Close");
-		close.setFont(font);
+		JButton reply = SyWindow.createButtonFontT("Reply", font);		
+		JButton delete = SyWindow.createButtonFontT("Delete", font);
+		JButton close = SyWindow.createButtonFontT("Close", font);
 
 		panelButtons.add(favorite);
 		panelButtons.add(reply);
@@ -142,10 +136,12 @@ public class SyOpenWindow {
 				if (!favoriteOption) {
 					favorite.setText("Unfavorite");
 					favoriteOption = true;
+					mail.setFavorite(true);
 					favoriteText.setText("Yes");
 				} else {
 					favorite.setText("Favorite");
 					favoriteOption = false;
+					mail.setFavorite(false);
 					favoriteText.setText("No");
 				}
 				
@@ -164,7 +160,7 @@ public class SyOpenWindow {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				deleted = true;
+				mail.setDeleted(true);
 				openFrame.dispose();
 			}
 		});
@@ -178,7 +174,7 @@ public class SyOpenWindow {
 				try {
 					JFrame composeFrame = compose.buildCompose();
 					SyWindow.setFrameVisible(composeFrame, true);
-					replied = true;
+					mail.setReplied(true);
 					openFrame.dispose();
 				} catch (IOException e1) {
 					e1.printStackTrace();
@@ -186,8 +182,7 @@ public class SyOpenWindow {
 				
 			}
 		});
-
-		
+			
 		return openFrame;
 	}
 

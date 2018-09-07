@@ -1,0 +1,21 @@
+{
+  "methodName": "getDays",
+  "paramNames": [
+    "mail"
+  ],
+  "srcTypes": [
+    "cmu.edu.mail.Mail"
+  ],
+  "tgtType": "long",
+  "packages": [
+    "java.time",
+    "cmu.edu.mail.Mail"
+  ],
+  "libs": [
+    "./lib/rt8.jar",
+    "./lib/symail.jar"
+  ],
+  "testBody": "public static boolean test() throws Throwable {int diff = 2;java.time.LocalDateTime now = java.time.LocalDateTime.now();java.time.LocalDateTime dt = java.time.LocalDateTime.of(now.getYear(), now.getMonthValue(), now.getDayOfMonth()-diff, now.getHour(), now.getMinute());cmu.edu.mail.Mail mail = new cmu.edu.mail.Mail(\"title\", \"foo@gmail.com\", \"This is an email!\", dt);long days = getDays(mail);return days == diff;}",
+  "hints": [
+  ]
+}

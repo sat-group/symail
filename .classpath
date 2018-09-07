@@ -2,14 +2,19 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/Users/utcs/Desktop/symail/lib/simple-java-mail-5.0.3.jar"/>
 	<classpathentry kind="lib" path="/Users/utcs/Desktop/symail/lib/hamcrest-core-1.3.jar"/>
 	<classpathentry kind="lib" path="/Users/utcs/Desktop/symail/lib/junit-4.12.jar"/>
 	<classpathentry kind="lib" path="/Users/utcs/Desktop/symail/lib/commons-io-2.5.jar"/>
 	<classpathentry kind="lib" path="/Users/utcs/Desktop/symail/lib/symail.jar"/>
-	<classpathentry kind="lib" path="/Users/utcs/Desktop/symail/lib/encryptor4j.jar"/>
-	<classpathentry kind="src" path="/Encryptor4j"/>
 	<classpathentry kind="lib" path="/Users/utcs/Desktop/symail/lib/javax.mail.jar"/>
 	<classpathentry kind="lib" path="/Users/utcs/Desktop/symail/lib/gson-2.8.5.jar"/>
 	<classpathentry kind="lib" path="/Users/utcs/Desktop/symail/lib/jsoup-1.11.3.jar"/>
+	<classpathentry kind="lib" path="/Users/utcs/Desktop/symail/lib/encryptor4j.jar"/>
+	<classpathentry kind="lib" path="/Users/utcs/Desktop/symail/lib/commons-cli-1.4.jar"/>
+	<classpathentry kind="lib" path="/Users/utcs/Desktop/symail/sypet/lib/org.apache.commons.codec-1.9.0.jar"/>
+	<classpathentry kind="lib" path="/Users/utcs/Desktop/symail/sypet/lib/commons-email-1.5.jar"/>
+	<classpathentry kind="lib" path="/Users/utcs/Desktop/symail/lib/greenmail-standalone-1.5.8.jar"/>
+	<classpathentry kind="lib" path="/Users/utcs/Desktop/symail/lib/emailaddress-rfc2822-1.1.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

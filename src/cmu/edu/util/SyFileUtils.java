@@ -35,38 +35,76 @@ package cmu.edu.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.apache.commons.io.FileUtils;
 
+import com.google.gson.Gson;
+
+import cmu.edu.mail.Mail;
+
 @SuppressWarnings("deprecation")
 public class SyFileUtils {
-	
+
 	public static boolean existFile(String path) {
 		File file = new File(path);
 		return file.isFile();
 	}
-	
+
+	public static File[] listFiles(String path) {
+		File folder = new File(path);
+		File[] listOfFiles = folder.listFiles();
+		return listOfFiles;
+	}
+
 	public static boolean existDirectory(String path) {
 		File dir = new File(path);
 		return dir.isDirectory();
 	}
-	
+
 	public static File createDirectory(String path) {
 		File dir = new File(path);
 		dir.mkdir();
 		return dir;
 	}
-		
+
+	public static File cleanDirectory(String path) throws IOException {
+		File dir = new File(path);
+		FileUtils.cleanDirectory(dir);
+		return dir;
+	}
+
 	public static File writeToFile(String path, String content) throws IOException {
 		File file = new File(path);
 		FileUtils.writeStringToFile(file, content);
 		return file;
 	}
-	
+
 	public static String readFromFile(String path) throws IOException {
 		File file = new File(path);
 		String content = FileUtils.readFileToString(file);
 		return content;
+	}
+
+	public static String readFile(String path, Charset encoding) throws IOException {
+		byte[] encoded = Files.readAllBytes(Paths.get(path));
+		return new String(encoded, encoding);
+	}
+	
+	public static File writeFile(String path, String content, Charset encoding) throws IOException {
+		File file = new File(path);
+		FileUtils.writeStringToFile(file, content, encoding);
+		return file;
+	}
+	
+	// --- need to create tests 
+	
+	public static File classToJson(String path, Mail mail, Gson json) throws IOException {
+		String result = json.toJson(mail);
+		File file = SyFileUtils.writeToFile(path, result);
+		return file;
 	}
 	
 

@@ -33,9 +33,17 @@
 
 package cmu.edu.window;
 
+import java.awt.Font;
 import java.io.IOException;
+import java.util.Vector;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableModel;
 
 public class SyWindow {
 
@@ -149,7 +157,173 @@ public class SyWindow {
 	    label.setFont(font);
 	    return label;
 	 // *** [End] Code Synthesized by SyPet 2.0 ***
-		
 	}
+	
+	public static javax.swing.JButton createButtonFont(String name, String font, int style, int size){
+		javax.swing.JButton button = new javax.swing.JButton(name);
+		java.awt.Font buttonFont = new java.awt.Font(font, style, size);
+		button.setFont(buttonFont);
+		return button;
+	}
+	
+	public static javax.swing.JButton createButtonFontT(String name, java.awt.Font font){
+		javax.swing.JButton button = new javax.swing.JButton(name);
+		button.setFont(font);
+		return button;
+	}
+	
+	public static javax.swing.JCheckBox createCheckBoxFont(String name, String font, int style, int size){
+		javax.swing.JCheckBox cbox = new javax.swing.JCheckBox(name);
+		java.awt.Font buttonFont = new java.awt.Font(font, style, size);
+		cbox.setFont(buttonFont);
+		return cbox;
+	}
+	
+	public static javax.swing.JCheckBox createCheckBoxFontT(String name, java.awt.Font font){
+		javax.swing.JCheckBox cbox = new javax.swing.JCheckBox(name);
+		cbox.setFont(font);
+		return cbox;
+	}
+	
+	public static java.awt.Dimension createDimension(int x, int y){
+		java.awt.Dimension d = new java.awt.Dimension(x,y);
+		return d;
+	}
+	
+	public static javax.swing.JButton createButtonDimension(javax.swing.JButton bd, int x, int y){
+		java.awt.Dimension d = new java.awt.Dimension(x,y);
+		bd.setPreferredSize(d);
+		return bd;
+	}
+	
+	public static javax.swing.JButton createButtonFontDimension(String name, java.awt.Font font, int x, int y){
+		javax.swing.JButton button = new javax.swing.JButton(name);
+		button.setFont(font);
+		java.awt.Dimension d = new java.awt.Dimension(x,y);
+		button.setPreferredSize(d);
+		return button;
+	}
+	
+	// --- need to create tests 
+	
+	public static javax.swing.JScrollPane createScrollPane(java.awt.Component view, int v, int h, java.awt.Dimension d, boolean value){
+		JScrollPane scroll = new JScrollPane(view, v, h);
+		scroll.setEnabled(value);
+		scroll.setPreferredSize(d);
+		return scroll;
+	}
+	
+	public static javax.swing.JScrollPane createScrollPane(java.awt.Component view, int v, int h, boolean value){
+		JScrollPane scroll = new JScrollPane(view, v, h);
+		scroll.setEnabled(value);
+		return scroll;
+	}
+	
+	public static javax.swing.JScrollPane createScrollPane(java.awt.Component view, int x, int y){
+		JScrollPane scroll = new JScrollPane(view);
+		java.awt.Dimension d = new java.awt.Dimension(x, y);
+		scroll.setPreferredSize(d);
+		return scroll;
+	}
+	
+	public static JList<String> setJListProperties(JList<String> list, int width, int height, java.awt.Font font){
+		list.setFixedCellWidth(width);
+		list.setFixedCellHeight(height);
+		list.setFont(font);
+		return list;
+	}
+	
+	public static JList<String> setJListProperties(JList<String> list, int width, int height){
+		list.setFixedCellWidth(width);
+		list.setFixedCellHeight(height);
+		return list;
+	}
+	
+	public static JList<String> setJListProperties(JList<String> list, java.awt.Font font){
+		list.setFont(font);
+		return list;
+	}
+	
+	public static JComboBox<String> setJComboProperties(JComboBox<String> list, java.awt.Font font){
+		list.setFont(font);
+		return list;
+	}
+	
+	
+	public static javax.swing.JPanel buildGrid(int cols, int rows, int hgap, int vgap){
+		javax.swing.JPanel panel = new javax.swing.JPanel();
+		java.awt.GridLayout var_0 = new java.awt.GridLayout(rows, cols, hgap, vgap);
+		panel.setLayout(var_0);
+		return panel;
+	}
+	
+	public static javax.swing.JLabel createLabel(String text){
+		javax.swing.JLabel label = new javax.swing.JLabel();
+		label.setText(text);
+		return label;
+	}
+	
+	public static javax.swing.JPanel buildGridFont(int cols, int rows, int hgap, int vgap, java.awt.Font font){
+		javax.swing.JPanel panel = new javax.swing.JPanel();
+		java.awt.GridLayout var_0 = new java.awt.GridLayout(rows, cols, hgap, vgap);
+		panel.setLayout(var_0);
+		panel.setFont(font);
+		return panel;
+	}
+	
+	public static javax.swing.JTextField createTextBuild(String text, int cols){
+		javax.swing.JTextField jtext = new javax.swing.JTextField(text, cols);
+		return jtext;
+	}
+	
+	public static javax.swing.JTextField createTextBuild(int cols){
+		javax.swing.JTextField jtext = new javax.swing.JTextField(cols);
+		return jtext;
+	}
+	
+	public static javax.swing.JTextField changeTextField(javax.swing.JTextField jtext, String text){
+		jtext.setText(text);
+		return jtext;
+	}
+	
+	public static javax.swing.JTextArea createTextArea(java.awt.Font font, boolean wrap, boolean wrapstyle, java.awt.Color color){
+		javax.swing.JTextArea area = new javax.swing.JTextArea();
+		area.setFont(font);
+		area.setLineWrap(wrap);
+		area.setWrapStyleWord(wrapstyle);
+		area.setBackground(color);
+		return area;
+	}
+	
+	public static java.awt.Color createColor(int r, int g, int b){
+		java.awt.Color color = new java.awt.Color(r, g, b);
+		return color;
+	}
+	
+	public static javax.swing.JTable createTable(String[][] data, String[] columns, Font font){
+		javax.swing.JTable  jt = new javax.swing.JTable(data, columns);
+		jt.setFont(font);
+		return jt;
+	}
+	
+	public static javax.swing.JTable createTable(String[][] data, String[] columns, Font font, int selection){
+		javax.swing.JTable  jt = new javax.swing.JTable(data, columns);
+		jt.setFont(font);
+		jt.setSelectionMode(selection);
+		return jt;
+	}
+	
+	public static javax.swing.table.DefaultTableModel createTableModel(String[][] data, String[] columns){
+		javax.swing.table.DefaultTableModel dt = new javax.swing.table.DefaultTableModel(data, columns);
+		return dt;
+	}
+	
+	public static javax.swing.JTable createTableModel(javax.swing.JTable table, String[][] data, String[] columns){
+		javax.swing.table.DefaultTableModel dt = new javax.swing.table.DefaultTableModel(data, columns);
+		table.setModel(dt);
+		return table;
+	}
+	
+	
 
 }

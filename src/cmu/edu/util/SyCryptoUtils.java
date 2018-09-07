@@ -34,57 +34,88 @@
 package cmu.edu.util;
 
 import java.io.File;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import java.security.Key;
+import java.security.MessageDigest;
+import java.util.Base64;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
 
-import org.apache.commons.io.FileUtils;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+
 import org.encryptor4j.util.FileEncryptor;
 import org.encryptor4j.util.TextEncryptor;
 
-@SuppressWarnings("deprecation")
 public class SyCryptoUtils {
-		  
-	  public static String encrypt(String message, String key) throws Exception {
-		  TextEncryptor te = new TextEncryptor(key);
-		  String encrypted = te.encrypt(message);
-		  return encrypted;
-	  }
-	  
-	  public static String decrypt(String message, String key) throws Exception {
-		  TextEncryptor te = new TextEncryptor(key);
-		  String decrypt = te.decrypt(message);
-		  return decrypt;
-	  }
-	  
-	  public static File encryptFile(String original, String encrypted, String password) throws Exception {
-		  File srcFile = new File(original);
-		  File destFile = new File(encrypted);
-		  FileEncryptor fe = new FileEncryptor(password);
-		  fe.encrypt(srcFile, destFile);
-		  return destFile;
-	  }
-	  
-	  public static File decryptFile(String encrypted, String decrypted, String password) throws Exception {
-		  File srcFile = new File(encrypted);
-		  File destFile = new File(decrypted);
-		  FileEncryptor fe = new FileEncryptor(password);
-		  fe.decrypt(srcFile, destFile);
-		  return destFile;	
-	  }
-	  
-	  static String readFile(String path, Charset encoding) 
-			  throws IOException 
-			{
-			  byte[] encoded = Files.readAllBytes(Paths.get(path));
-			  return new String(encoded, encoding);
-			}
 
-	  static File writeToFile(String path, String content) throws Exception {
-		  File file = new File(path);
-		  FileUtils.writeStringToFile(file, content);
-		  return file;
-	  }
-	  
+	public static String encrypt(String message, String key) throws Throwable {
+		TextEncryptor te = new TextEncryptor(key);
+		String encrypted = te.encrypt(message);
+		return encrypted;
+	}
+
+	public static String decrypt(String message, String key) throws Throwable {
+		TextEncryptor te = new TextEncryptor(key);
+		String decrypt = te.decrypt(message);
+		return decrypt;
+	}
+
+	public static File encryptFile(String original, String encrypted, String password) throws Throwable {
+		File srcFile = new File(original);
+		File destFile = new File(encrypted);
+		FileEncryptor fe = new FileEncryptor(password);
+		fe.encrypt(srcFile, destFile);
+		return destFile;
+	}
+
+	public static File decryptFile(String encrypted, String decrypted, String password) throws Throwable {
+		File srcFile = new File(encrypted);
+		File destFile = new File(decrypted);
+		FileEncryptor fe = new FileEncryptor(password);
+		fe.decrypt(srcFile, destFile);
+		return destFile;
+	}
+
+	public static String encryptNoSalt(String data, Key key, String protocol, int mode) throws Throwable {
+		Cipher c = Cipher.getInstance(protocol);
+		c.init(mode, key);
+		byte[] enc = data.getBytes();
+		byte[] encVal = c.doFinal(enc);
+		Encoder encoder = Base64.getEncoder();
+		String output = encoder.encodeToString(encVal);
+		return output;
+	}
+
+	public static Key generateKey(String password, String hash, String protocol) throws Throwable {
+		MessageDigest hasher = MessageDigest.getInstance(hash);
+		byte[] passwordBytes = password.getBytes();
+		byte[] key256 = hasher.digest(passwordBytes);
+		Key key = new SecretKeySpec(key256, protocol);
+		return key;
+	}
+
+	public static byte[] hashText(String password, String hash) throws Throwable {
+		MessageDigest hasher = MessageDigest.getInstance(hash);
+		byte[] passwordBytes = password.getBytes();
+		byte[] key256 = hasher.digest(passwordBytes);
+		return key256;
+	}
+
+	public static java.lang.String hashTextString(java.lang.String text, java.lang.String hash) throws Throwable {
+		byte[] var_0 = org.apache.commons.codec.binary.StringUtils.getBytesIso8859_1(text);
+		java.security.MessageDigest var_1 = java.security.MessageDigest.getInstance(hash);
+		byte[] var_2 = var_1.digest(var_0);
+		java.lang.String var_3 = org.apache.commons.codec.binary.Hex.encodeHexString(var_2);
+		return var_3;
+	}
+
+	public static String decryptNoSalt(String message, Key key, String protocol, int mode) throws Throwable {
+		java.util.Base64.Decoder var_0 = java.util.Base64.getMimeDecoder();
+		byte[] var_1 = var_0.decode(message);
+		javax.crypto.Cipher var_2 = javax.crypto.Cipher.getInstance(protocol);
+		var_2.init(mode,key);
+		byte[] var_3 = var_2.doFinal(var_1);
+		java.lang.String var_4 =  new java.lang.String(var_3);
+		return var_4;
+	}
 }

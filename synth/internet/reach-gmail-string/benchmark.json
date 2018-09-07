@@ -1,0 +1,23 @@
+{
+  "methodName": "canReachGmail",
+  "paramNames": [
+    "host",
+    "port"
+  ],
+  "srcTypes": [
+    "java.lang.String",
+    "int"
+  ],
+  "tgtType": "java.lang.String",
+  "packages": [
+    "java.net",
+    "java.io"
+  ],
+  "libs": [
+    "./lib/rt8.jar"
+  ],
+  "testPath": "../synth/internet/reach-gmail-string/test.java",
+  "hints": [
+    "java.net.Socket(Constructor)"
+  ]
+}

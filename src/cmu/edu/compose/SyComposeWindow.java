@@ -47,7 +47,6 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.swing.BorderFactory;
 
-import com.sun.glass.ui.TouchInputSupport;
 import com.sun.mail.smtp.SMTPTransport;
 
 import javax.swing.JButton;
@@ -70,18 +69,16 @@ public class SyComposeWindow {
 	private JTextField subject;
 	private JTextArea body;
 	private GmailStore gmail;
-	
+
 	private String toName;
 	private String toTitle;
 
 	public SyComposeWindow(GmailStore gmail) {
-
 		this.gmail = gmail;
 		toName = "";
 		toTitle = "";
-
 	}
-	
+
 	public SyComposeWindow(GmailStore gmail, String to, String title) {
 		this.gmail = gmail;
 		toName = to;
@@ -90,43 +87,39 @@ public class SyComposeWindow {
 
 	@SuppressWarnings("unused")
 	public JFrame buildCompose() throws IOException {
-		
+
 		boolean replying = !toName.equals("");
-		
+
 		// JPanel for the text fields
 		JFrame composeFrame = SyWindow.buildFrame(450, 600, "SyMail - Synthesized Mail Client");
 		composeFrame.setLocationRelativeTo(null);
 		SyWindow.setFrameAttributes(composeFrame, JFrame.EXIT_ON_CLOSE, false);
 
-		JPanel tfPanel = new JPanel(new GridLayout(3, 2, 10, 2));
+		Font font = SyWindow.createFont("Serif", Font.PLAIN, 18);
+		JPanel tfPanel = SyWindow.buildGridFont(2, 3, 10, 2, font);
 
 		JPanel top = SyWindow.buildBorder(0, 0, 0, 0);
 		SyWindow.buildGrid(top, 1, 2);
 		JPanel iconPanel = SyWindow.buildBorder(0, 0, 0, 0);
 		JLabel icon = SyWindow.buildImage("./img/logo.png");
 		top.add(icon);
+		
+		JLabel labelTo = SyWindow.createLabel("  To:  ");
+		tfPanel.add(labelTo);
 
-		Font font = new Font("Serif", Font.PLAIN, 18);
-
-		tfPanel.add(new JLabel("  To:  "));
-		tfPanel.setFont(font);
-		to = new JTextField(15);
+		to = SyWindow.createTextBuild(15);
 		tfPanel.add(to);
 		if (replying)
-			to.setText(toName);
-		
+			to = SyWindow.changeTextField(to,toName);
+
 		tfPanel.add(new JLabel("  Subject:  "));
-		subject = new JTextField(15);
+		subject = SyWindow.createTextBuild(15);
 		tfPanel.add(subject);
 		if (replying)
-			subject.setText(toTitle);
+			subject = SyWindow.changeTextField(subject, toTitle);
 
-		body = new JTextArea();
-		body.setFont(font);
-		body.setLineWrap(true);
-		body.setWrapStyleWord(true);
-		// light blue
-		body.setBackground(new Color(204, 238, 241)); 
+		Color bodyColor = SyWindow.createColor(204, 238, 241);
+		body = SyWindow.createTextArea(font, true, true, bodyColor);
 		
 		// Wrap the JTextArea inside a JScrollPane
 		JScrollPane tAreaScrollPane = new JScrollPane(body);
@@ -166,12 +159,14 @@ public class SyComposeWindow {
 					Session session = Session.getDefaultInstance(props);
 					Transport tp = session.getTransport("smtps");
 					SMTPTransport transport = (SMTPTransport) tp;
-					
-//					SyMailClient.sendEmail("smtp.gmail.com", gmail.getUsername(), gmail.getPassword(), to.getText(),
-//							subject.getText(), body.getText(), tp, session);
+
+					// SyMailClient.sendEmail("smtp.gmail.com", gmail.getUsername(),
+					// gmail.getPassword(), to.getText(),
+					// subject.getText(), body.getText(), tp, session);
 
 					Message message = SyMailClient.buildMessage(session, to.getText(), subject.getText(),
 							body.getText());
+										
 					int result = SyMailClient.sendEmail("smtp.gmail.com", gmail.getUsername(), gmail.getPassword(),
 							message, transport);
 					if (result != 250) {
@@ -179,7 +174,7 @@ public class SyComposeWindow {
 						SyWarningWindow.EmailFailure();
 					} else {
 						composeFrame.dispose();
-					}					
+					}
 
 				} catch (Exception e1) {
 					SyWarningWindow.EmailFailure();

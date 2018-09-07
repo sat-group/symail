@@ -85,6 +85,20 @@ public class SyWarningWindow {
 		JOptionPane.showOptionDialog(null, panel, "SyMail - ERROR", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE,
 				null, options, null);
 	}
+	
+	public static void EmailReadFailure() {
+		Font font = SyWindow.createFont("serif", Font.PLAIN, 18);
+		JPanel panel = null;
+		try {
+			panel = SyWindowComposition.buildWarningWindow("./img/warning.png", "Could not read emails from Gmail.",
+					font);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		Object[] options = { "OK" };
+		JOptionPane.showOptionDialog(null, panel, "SyMail - ERROR", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE,
+				null, options, null);		
+	}
 
 	public static void PasswordCheck() {
 		Font font = SyWindow.createFont("serif", Font.PLAIN, 18);
@@ -98,5 +112,19 @@ public class SyWarningWindow {
 		JOptionPane.showOptionDialog(null, panel, "SyMail - ERROR", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE,
 				null, options, null);
 	}
+	
+	public static void GmailCheck() {
+		Font font = SyWindow.createFont("serif", Font.PLAIN, 18);
+		JPanel panel = null;
+		try {
+			panel = SyWindowComposition.buildWarningWindow("./img/warning.png", "Cannot connect to Gmail.", font);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		Object[] options = { "OK" };
+		JOptionPane.showOptionDialog(null, panel, "SyMail - ERROR", JOptionPane.OK_OPTION, JOptionPane.PLAIN_MESSAGE,
+				null, options, null);
+	}
+
 
 }

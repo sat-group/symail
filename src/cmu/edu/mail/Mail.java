@@ -46,6 +46,27 @@ public class Mail {
 	private boolean replyTo;
 	private boolean favorite;
 	private boolean read;
+	private boolean deleted;
+	
+	public void setFavorite(boolean value) {
+		favorite = value;
+	}
+	
+	public void setRead(boolean value) {
+		read = value;
+	}
+	
+	public void setReplied(boolean value) {
+		replyTo = value;
+	}
+	
+	public void setDeleted(boolean value) {
+		deleted = value;
+	}
+	
+	public boolean getDeleted() {
+		return deleted;
+	}
 
 	public String getTitle() {
 		return title;
@@ -74,6 +95,17 @@ public class Mail {
 	public boolean getRead() {
 		return read;
 	}
+	
+	public Mail(String title, String address, String body) {
+		this.title = title;
+		this.from = new Address(address);
+		this.body = body;
+		this.date = LocalDateTime.now();
+		favorite = false;
+		replyTo = false;
+		read = false;
+		deleted = false;
+	}
 
 	public Mail(String title, String address, String body, LocalDateTime date) {
 		this.title = title;
@@ -83,10 +115,10 @@ public class Mail {
 		favorite = false;
 		replyTo = false;
 		read = false;
+		deleted = false;
 	}
 
-	public Mail(String title, String address, String body, LocalDateTime date, boolean favorite, boolean reply,
-			boolean search, boolean read) {
+	public Mail(String title, String address, String body, LocalDateTime date, boolean favorite, boolean reply, boolean read) {
 		this.title = title;
 		this.from = new Address(address);
 		this.body = body;
@@ -94,6 +126,7 @@ public class Mail {
 		this.favorite = favorite;
 		this.replyTo = reply;
 		this.read = read;
+		deleted = false;
 	}
 
 }

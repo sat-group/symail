@@ -1,0 +1,20 @@
+{
+  "methodName": "canReachGmail",
+  "paramNames": [
+    "socket"
+  ],
+  "srcTypes": [
+    "java.net.Socket"
+  ],
+  "tgtType": "java.lang.String",
+  "packages": [
+    "java.net",
+    "java.io"
+  ],
+  "libs": [
+    "./lib/rt8.jar"
+  ],
+  "testBody": "public static boolean test1() throws Throwable {   java.net.Socket socket = new java.net.Socket(\"smtp.gmail.com\",587); java.lang.String output = canReachGmail(socket); return output.contains(\"220 smtp.gmail.com\");}",
+  "hints": [
+  ]
+}

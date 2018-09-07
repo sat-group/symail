@@ -1,0 +1,33 @@
+{
+  "methodName": "decryptNoSalt",
+  "paramNames": [
+    "message",
+    "key",
+    "protocol",
+    "mode"
+  ],
+  "srcTypes": [
+    "java.lang.String",
+    "java.security.Key",
+    "java.lang.String",
+    "int"
+  ],
+  "tgtType": "java.lang.String",
+  "packages": [
+    "javax.crypto.Cipher",
+    "java.util.Base64",
+    "java.lang.String",
+    "java.security.Key"
+  ],
+  "libs": [
+    "./lib/rt8.jar",
+    "./lib/symail.jar",
+    "./lib/javax-crypto.jar"
+  ],
+  "testBody": "public boolean test() throws Throwable { java.lang.String password = \"mysupersecretpassword\";java.lang.String text = \"qtAgNnuVEVxdFs9pebI0I3MZ+gAlDvAnq1OWESNqlwY=\";java.lang.String protocol = \"AES\";java.security.Key key = cmu.edu.util.SyCryptoUtils.generateKey(password, \"MD5\", \"AES\");java.lang.String decrypted = decryptNoSalt(text, key, protocol, javax.crypto.Cipher.DECRYPT_MODE);java.lang.String decoded = \"This is a secret message\";return decrypted.equals(decoded); }",
+  "hints": [
+    "init",
+    "doFinal",
+    "decode"
+  ]
+}

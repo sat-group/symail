@@ -1,0 +1,25 @@
+{
+  "methodName": "hashTextString",
+  "paramNames": [
+    "text",
+    "hash"
+  ],
+  "srcTypes": [
+    "java.lang.String",
+    "java.lang.String"
+  ],
+  "tgtType": "java.lang.String",
+  "packages": [
+    "java.security.MessageDigest",
+    "org.apache.commons.codec.binary",
+    "java.lang.String"
+  ],
+  "libs": [
+    "./lib/rt8.jar",
+    "./lib/org.apache.commons.codec-1.9.0.jar"
+  ],
+  "testBody": " public boolean test() throws Throwable {    String password = \"mysupersecretpassword\"; String hashpassword = \"117a520adbd19eff51100215aa7a7fbf\"; String hash = \"MD5\"; String decrypted = hashTextString(password, hash); return decrypted.equals(hashpassword);}",
+  "hints": [
+    "digest"
+  ]
+}
