@@ -55,7 +55,6 @@ public class SyMail {
 		SyLoginWindow login = new SyLoginWindow();
 		JFrame loginFrame = login.buildLogin();
 		loginFrame = SyWindow.setFrameVisible(loginFrame, true);
-		
 	}
 
 }

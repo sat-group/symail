@@ -192,7 +192,8 @@ public class SyInboxWindow {
 
 		if (!SyFileUtils.existDirectory("tmp/"))
 			SyFileUtils.createDirectory("tmp/");
-
+		
+		SyFileUtils.cleanDirectory("tmp/");
 		SyFileUtils.cleanDirectory(mailDir);
 
 		// save emails to tmp directory
@@ -213,7 +214,11 @@ public class SyInboxWindow {
 		String result = "";
 		if (message.isMimeType("text/plain")) {
 			result = message.getContent().toString();
+		} else if (message.isMimeType("text/html")) {
+			String html = message.getContent().toString();
+			result = org.jsoup.Jsoup.parse(html).text();
 		} else if (message.isMimeType("multipart/*")) {
+			System.out.println("text is multipart!");
 			MimeMultipart mimeMultipart = (MimeMultipart) message.getContent();
 			result = getTextFromMimeMultipart(mimeMultipart);
 		}
@@ -242,7 +247,7 @@ public class SyInboxWindow {
 	public void readGmail() throws MessagingException, IOException {
 		Store gmail = store.getStore();
 		if (!gmail.isConnected())
-			store.getStore().connect();
+			gmail.connect();
 
 		if (!gmail.isConnected()) {
 			SyWarningWindow.GmailCheck();
@@ -250,16 +255,16 @@ public class SyInboxWindow {
 		}
 
 		try {
-			Message[] messages = SyMail.getEmails(store.getStore(), "INBOX", Folder.READ_ONLY);
+			Folder folderMessages = SyMail.getEmailFolder(gmail, "INBOX", Folder.READ_ONLY);
+			Message[] messages = folderMessages.getMessages();
 			for (int i = 0, n = messages.length; i < n; i++) {
 				Message message = messages[i];
-				// FIXME: can I synthesize a version of the below?
 				String body = getTextFromMessage(message);
 				LocalDateTime local = SyDate.convertDate(message);
-				// FIXME: should I synthesize simple getters?
 				Mail mail = new Mail(message.getSubject(), message.getFrom()[0].toString(), body, local);
 				mails.add(mail);
 			}
+			folderMessages.close();
 			gmail.close();
 		} catch (Exception e1) {
 			SyWarningWindow.EmailReadFailure();

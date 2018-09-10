@@ -6,13 +6,7 @@ public class ExampleCrypto {
 //# return: java.lang.String
 //# hints: digest
 public static java.lang.String hashTextString(java.lang.String text, java.lang.String hash) {
-
-byte[] var_0 = org.apache.commons.codec.binary.StringUtils.getBytesIso8859_1(text);
-java.security.MessageDigest var_1 = java.security.MessageDigest.getInstance(hash);
-byte[] var_2 = var_1.digest(var_0);
-java.lang.String var_3 = org.apache.commons.codec.binary.Hex.encodeHexString(var_2);
-return var_3;
-
+  //#SyPet
 }
 
 // # //
@@ -28,15 +22,7 @@ public static boolean test1() throws Throwable {
 //# return: java.lang.String
 //# hints: doFinal decode
 public static java.lang.String decrypt(java.lang.String text, java.security.Key key, java.lang.String protocol, int mode){
-
-java.util.Base64.Decoder var_0 = java.util.Base64.getMimeDecoder();
-javax.crypto.Cipher var_1 = javax.crypto.Cipher.getInstance(protocol);
-byte[] var_2 = var_0.decode(text);
-var_1.init(mode,key);
-byte[] var_3 = var_1.doFinal(var_2);
-java.lang.String var_4 =  new java.lang.String(var_3);
-return var_4;
-
+ //#SyPet
 }
 
 // # //

@@ -14,6 +14,12 @@ public class SyMail {
 		Message[] messages = emailFolder.getMessages();
 		return messages;
 	}
+	
+	public static Folder getEmailFolder(Store store, String inbox, int open) throws MessagingException {
+		Folder emailFolder = store.getFolder(inbox);
+		emailFolder.open(open);
+		return emailFolder;
+	}
 
 	public static Message[] getEmailsConnectClose(Store store, String inbox, int open) throws MessagingException {
 		store.connect();

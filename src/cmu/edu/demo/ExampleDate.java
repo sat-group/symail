@@ -23,7 +23,7 @@ public static boolean test1() throws Throwable {
 
 //# packages: java.time cmu.edu.mail.Mail
 //# return: java.lang.String
-//# hints: 
+//# hints:
 public static java.lang.String extractDate(cmu.edu.mail.Mail mail, java.lang.String format) {
 		//#SyPet
 }

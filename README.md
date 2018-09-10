@@ -1,4 +1,4 @@
-# symail
+# SyMail
 Mail client synthesized with SyPet as code assistant!
 
 ![Alt text](screenshots/symail.png?raw=true "Title")
